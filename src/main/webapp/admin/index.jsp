@@ -12,7 +12,7 @@
 		<h2 class="text-center">Quick action:</h2>
 		<div class="d-flex justify-content-center">
 			<a href="#" class="me-4">New book</a>
-			<a href="user_form.jsp" class="me-4">New user</a>
+			<a href="manage_user?command=NEW" class="me-4">New user</a>
 			<a href="#" class="me-4">New category</a>
 			<a href="#" class="me-4">New Customer</a>
 		</div>

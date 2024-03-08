@@ -9,7 +9,7 @@
 		<hr class="mx-auto" style="width:50%;"/>
 		
 		<div class="d-flex justify-content-center">
-			<a href="user_form.jsp" class="me-4">New user</a>
+			<a href="manage_user?command=NEW" class="me-4">New user</a>
 		</div>
 		
 		<hr class="mx-auto" style="width:50%;"/>
@@ -30,13 +30,19 @@
 				<tbody>
 					<c:forEach var="user" items="${userList}" varStatus="iterationCount">
 					
+						<!-- ....manage_user?command=LOAD&userId=${user.userId } -->
+						<c:url var="updateLink" value="manage_user">
+							<c:param name="command" value="LOAD" />
+							<c:param name="userId" value="${user.userId }" />
+						</c:url>
+					
 						<tr>
 							<td>${iterationCount.index + 1}</td>
 							<td>${user.userId}</td>
 							<td>${user.email}</td>
 							<td>${user.fullName}</td>
 							<td>
-								<a href="#">Edit</a>
+								<a href="${updateLink}">Edit</a>
 								<span class="mx-3"> | </span>
 								<a href="#">Delete</a>
 							</td>

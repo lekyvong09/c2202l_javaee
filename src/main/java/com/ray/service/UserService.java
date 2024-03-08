@@ -27,4 +27,12 @@ public class UserService {
 		return null;
 	}
 	
+	public User getById(Integer userId) {
+		return this.userDAO.getById(userId);
+	}
+	
+	public User updateUser(User user) {
+		return userDAO.update(user);
+	}
+	
 }

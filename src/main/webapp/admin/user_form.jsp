@@ -18,28 +18,45 @@
 	
 	
 	<div class="container py-5">
-	
-		<h1 class="text-center mb-4">Create new user</h1>
+		<c:choose>
+			<c:when test="${theUser != null && not empty theUser.userId}">
+				<h1 class="text-center mb-4">Edit user</h1>
+				<c:url var="actionLink" value="manage_user">
+					<c:param name="command" value="UPDATE"/>
+				</c:url>
+			</c:when>
+			<c:otherwise>
+				<h1 class="text-center mb-4">Create user</h1>
+				<c:url var="actionLink" value="manage_user">
+					<c:param name="command" value="INSERT"/>
+				</c:url>
+			</c:otherwise>
+		</c:choose>
+		
 		
 		<hr class="mx-auto" style="width:50%">
 		
 		<div class="d-flex flex-column align-items-center py-5">
-			<form id="userForm" style="width:350px;" action="manage_user" method="post">
+			<form id="userForm" style="width:350px;" action="${actionLink}" method="post">
+				
+				<c:if test="${theUser != null}">
+					<input type="hidden" name="userId" value="${theUser.userId}">
+				</c:if>
 				
 				<div class="form-floating mb-3">
-					<input name="email" type="email" class="form-control" id="inputUserEmail" placeholder="email">
+					<input name="email" type="email" value="${theUser.email}" class="form-control" id="inputUserEmail" placeholder="email">
 					<label for="inputUserEmail">Email address</label>
 					<div class="invalid-feedback">Please provide a valid email</div>
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input name="fullName" type="text" class="form-control" id="inputFullname" placeholder="fullname">
+					<input name="fullName" type="text" value="${theUser.fullName}" class="form-control" id="inputFullname" placeholder="fullname">
 					<label for="inputFullname">Full name</label>
 					<div class="invalid-feedback">Please provide a valid full name</div>
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input name="password" type="password" class="form-control" id="inputPassword" placeholder="pass">
+					<input name="password" type="password" value="${theUser.password}" class="form-control" id="inputPassword" placeholder="pass">
 					<label for="inputPassword">Password</label>
 					<div class="invalid-feedback">Password is require</div>
 				</div>
