@@ -45,6 +45,9 @@ public class UserController extends HttpServlet {
 			case "LOAD":
 				showEditForm(request, response);
 				break;
+			case "DELETE":
+				deleteUser(request, response);
+				break;
 			default:
 				getUserList(request, response);
 		}
@@ -126,15 +129,30 @@ public class UserController extends HttpServlet {
 	}
 	
 	
-	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Integer userId = Integer.valueOf(request.getParameter("userId"));
 		String email = request.getParameter("email");
 		String fullName = request.getParameter("fullName");
 		String password = request.getParameter("password");
 		
 		User user = new User(userId, email, fullName, password);
-		userService.updateUser(user);
+		String errorMessage = userService.updateUser(user);
 		
+		if (errorMessage != null) {
+			request.setAttribute("message", errorMessage);
+			request.setAttribute("theUser", user);
+			RequestDispatcher rd = request.getRequestDispatcher("user_form.jsp");
+			rd.forward(request, response);
+			return;
+		}
+		
+		response.sendRedirect("manage_user?command=LIST");
+	}
+
+
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Integer userId = Integer.valueOf(request.getParameter("userId"));
+		this.userService.deleteUser(userId);
 		response.sendRedirect("manage_user?command=LIST");
 	}
 

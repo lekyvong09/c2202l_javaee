@@ -31,8 +31,20 @@ public class UserService {
 		return this.userDAO.getById(userId);
 	}
 	
-	public User updateUser(User user) {
-		return userDAO.update(user);
+	public String updateUser(User user) {
+		User existUser = this.userDAO.getUserByEmail(user.getEmail());
+		 
+		if (existUser != null && existUser.getUserId() != user.getUserId()) {
+			return "The email is already used by other account.";
+		}
+		
+		userDAO.update(user);
+		return null;
+	}
+	
+	
+	public void deleteUser(Integer userId) {
+		this.userDAO.deleteById(userId);
 	}
 	
 }

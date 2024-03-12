@@ -4,12 +4,12 @@
 	<%@include file="menu.jsp" %>
 	
 	<div class="container py-5">
-		<h1 class="text-center mb-4">User Management</h1>
+		<h1 class="text-center mb-4">Category Management</h1>
 		
 		<hr class="mx-auto" style="width:50%;"/>
 		
 		<div class="d-flex justify-content-center">
-			<a href="manage_user?command=NEW" class="me-4">New user</a>
+			<a href="manage_category?command=NEW" class="me-4">New category</a>
 		</div>
 		
 		<hr class="mx-auto" style="width:50%;"/>
@@ -21,30 +21,27 @@
 					<tr>
 						<th>Index</th>
 						<th>Id</th>
-						<th>Email</th>
-						<th>FullName</th>
+						<th>Name</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<c:forEach var="user" items="${userList}" varStatus="iterationCount">
+					<c:forEach var="category" items="${categoryList}" varStatus="iterationCount">
 					
-						<!-- ....manage_user?command=LOAD&userId=${user.userId } -->
-						<c:url var="updateLink" value="manage_user">
+						<c:url var="updateLink" value="manage_category">
 							<c:param name="command" value="LOAD" />
-							<c:param name="userId" value="${user.userId }" />
+							<c:param name="categoryId" value="${category.categoryId }" />
 						</c:url>
 					
 						<tr>
 							<td>${iterationCount.index + 1}</td>
-							<td>${user.userId}</td>
-							<td>${user.email}</td>
-							<td>${user.fullName}</td>
+							<td>${category.categoryId}</td>
+							<td>${category.name}</td>
 							<td>
 								<a href="${updateLink}">Edit</a>
 								<span class="mx-3"> | </span>
-								<a href="javascript:confirmDelete(${user.userId})">Delete</a>
+								<a href="javascript:confirmDelete(${category.categoryId})">Delete</a>
 							</td>
 						</tr>
 					
@@ -58,9 +55,9 @@
 	<jsp:include page="footer.jsp" />
 	
 	<script type="text/javascript">
-		function confirmDelete(userId) {
+		function confirmDelete(categoryId) {
 			if (confirm('Are you sure')) {
-				window.location = 'manage_user?command=DELETE&userId=' + userId;
+				window.location = 'manage_category?command=DELETE&categoryId=' + categoryId;
 			}
 		}
 	</script>
