@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ray.entity.User;
 import com.ray.service.UserService;
+import com.ray.utilities.CryptoUtil;
 
 
 @WebServlet("/admin/manage_user")
@@ -114,7 +115,10 @@ public class UserController extends HttpServlet {
 		String fullName = request.getParameter("fullName");
 		String password = request.getParameter("password");
 		
-		User newUser = new User(email, fullName, password);
+		User newUser = new User(
+				email, 
+				fullName, 
+				CryptoUtil.hashPassword(password, getServletContext().getInitParameter("salt")));
 		String errorMessage = userService.createUser(newUser);
 		
 		if (errorMessage != null) {
@@ -135,7 +139,11 @@ public class UserController extends HttpServlet {
 		String fullName = request.getParameter("fullName");
 		String password = request.getParameter("password");
 		
-		User user = new User(userId, email, fullName, password);
+		User user = new User(
+				userId, 
+				email, 
+				fullName, 
+				CryptoUtil.hashPassword(password, getServletContext().getInitParameter("salt")));
 		String errorMessage = userService.updateUser(user);
 		
 		if (errorMessage != null) {

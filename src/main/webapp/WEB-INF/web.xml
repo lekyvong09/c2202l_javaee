@@ -7,6 +7,21 @@
   	<param-value>http://localhost:8080/ebook</param-value>
   </context-param>
   
+  <context-param>
+  	<param-name>salt</param-name>
+  	<param-value>[db]Hq38cn%eOd9A7za$C6uEp-GGT1A/d%z/Y;G)GRw4W=vcBG{VYl]N3XDzEer_wbZE3%KB-QqfLggtaJ||Jv0[iUsj]OV</param-value>
+  </context-param>
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/404.jsp</location>
+  </error-page>
+  
+   <!-- <error-page>
+  	<error-code>500</error-code>
+  	<location>/error/500.jsp</location>
+  </error-page> -->
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

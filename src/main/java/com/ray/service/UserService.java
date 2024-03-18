@@ -47,4 +47,11 @@ public class UserService {
 		this.userDAO.deleteById(userId);
 	}
 	
+	public String checkLogin(String email, String password) {
+		if (!this.userDAO.checkLogin(email, password)) {
+			return "Wrong username and password";
+		}
+		return null;
+	}
+	
 }

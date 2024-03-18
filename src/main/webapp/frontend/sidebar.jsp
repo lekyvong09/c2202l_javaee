@@ -6,11 +6,36 @@
 
 	<ul class="nav nav-pills flex-column mb-auto">
 		<c:forEach var="category" items="${categoryList}" varStatus="status">
-			<a 
-				href="product?command=listByCategory&id=${category.categoryId }" 
-				class="nav-link link-dark d-flex align-itmes-center" aria-current="page">
+			<li class="nav-item mb-3">
+				<a 
+					href="product?command=listByCategory&id=${category.categoryId }" 
+					class="nav-link link-dark d-flex align-items-center" aria-current="page">
+						<c:choose>
+							<c:when test="${fn:toLowerCase(category.name) == 'comic' }">
+								<img alt="comic" src="<c:url value="/images/comic.svg"/>" class="me-2" style="width:50px; height:50px;">
+							</c:when>
+							<c:when test="${fn:toLowerCase(category.name) == 'programming' }">
+								<img alt="comic" src="<c:url value="/images/programming.svg"/>" class="me-2" style="width:50px; height:50px;">
+							</c:when>
+							<c:when test="${fn:toLowerCase(category.name) == 'romantic' }">
+								<img alt="comic" src="<c:url value="/images/romantic.svg"/>" class="me-2" style="width:50px; height:50px;">
+							</c:when>
+							<c:when test="${fn:toLowerCase(category.name) == 'fiction' }">
+								<img alt="comic" src="<c:url value="/images/fiction.svg"/>" class="me-2" style="width:50px; height:50px;">
+							</c:when>
+							<c:otherwise>
+								<img alt="other" src="<c:url value="/images/book.svg"/>">
+							</c:otherwise>
+						</c:choose>
+				
+						<c:out value="${category.name}"/>
+				</a>
+			</li>
 			
-			</a>
+			<c:if test="${status.last}">
+				<hr>
+			</c:if>
+			
 		</c:forEach>
 	
 	

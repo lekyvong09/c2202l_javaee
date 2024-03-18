@@ -81,6 +81,11 @@ class UserDAOTest {
 		assertNotNull(user);
 	}
 	
+	@Test
+	void testLoginSuccess() {
+		assertTrue(userDAO.checkLogin("ray@email.com", "password"));
+	}
+	
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {

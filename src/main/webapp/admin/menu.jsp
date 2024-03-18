@@ -7,12 +7,21 @@
 			<img alt="img" src="<c:url value="/images/logo.png" />">
 		</a>
 		
-		<div class="d-flex justify-content-end align-items-center vw-50">
-			Welcome, Admin
-			<span class="mx-3"> | </span>
-			
-			<input class="btn btn-outline-secondary" type="button" value="Logout" />
-		</div>
+		
+		<c:if test="${sessionScope.userEmail != null}">
+			<div class="d-flex justify-content-end align-items-center vw-50">
+				Welcome, <c:out value="${sessionScope.userEmail}"></c:out>
+				<span class="mx-3"> | </span>
+				<a href="login" class="btn btn-outline-secondary ms-4" type="button">Logout</a>
+			</div>
+		</c:if>
+		
+		<c:if test="${sessionScope.userEmail == null}">
+			<div class="d-flex justify-content-end align-items-center vw-50">
+				<a href="login.jsp" class="btn btn-outline-secondary ms-4" type="button">Login</a>
+			</div>
+		</c:if>
+		
 	</div>
 	
 	
