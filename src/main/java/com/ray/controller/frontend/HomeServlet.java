@@ -27,8 +27,8 @@ public class HomeServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Category> categoryList = categoryService.listCategory();
-		request.setAttribute("categoryList", categoryList);
+//		List<Category> categoryList = categoryService.listCategory();
+//		request.setAttribute("categoryList", categoryList);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("frontend/index.jsp");
 		dispatcher.forward(request, response);

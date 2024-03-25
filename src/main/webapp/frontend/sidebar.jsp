@@ -4,11 +4,16 @@
 
 <div class="d-flex flex-column flex-shrink-0 p-3 float-start h-100" style="width:280px;">
 
+	<a href="product?command=LIST" 
+		class="nav-link link-dark d-flex align-items-center" aria-current="page">
+			<span>Category</span>
+		</a>
+
 	<ul class="nav nav-pills flex-column mb-auto">
 		<c:forEach var="category" items="${categoryList}" varStatus="status">
 			<li class="nav-item mb-3">
 				<a 
-					href="product?command=listByCategory&id=${category.categoryId }" 
+					href="product?command=LIST&id=${category.categoryId }" 
 					class="nav-link link-dark d-flex align-items-center" aria-current="page">
 						<c:choose>
 							<c:when test="${fn:toLowerCase(category.name) == 'comic' }">

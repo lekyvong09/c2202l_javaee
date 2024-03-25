@@ -54,4 +54,12 @@ public class ProductDAO extends JpaDAO<Product> {
 		
 		return null;
 	}
+	
+	public List<Product> getProductByCategory(int categoryId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("categoryId", categoryId);
+		
+		List<Product> productList = super.getByNamedQueryWithParams("Product.HQL.getByCategory", params);
+		return productList;
+	}
 }

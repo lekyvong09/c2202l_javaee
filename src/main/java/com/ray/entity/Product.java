@@ -1,5 +1,6 @@
 package com.ray.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Base64;
 import java.util.Date;
@@ -22,9 +23,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name="product")
 @NamedQueries({
 	@NamedQuery(name = "Product.HQL.getByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+	@NamedQuery(name = "Product.HQL.getByCategory", query = "SELECT p FROM Product p JOIN Category c ON p.category.categoryId = c.categoryId AND c.categoryId = :categoryId"),
 })
-public class Product {
+public class Product implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="product_id")
 	@Id

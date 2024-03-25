@@ -1,5 +1,6 @@
 package com.ray.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -19,7 +20,9 @@ import javax.persistence.Table;
 	@NamedQuery(name = "User.HQL.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
 	@NamedQuery(name = "User.HQL.checkLogin", query = "SELECT u FROM User u WHERE u.email = :email and u.password=:password"),
 })
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="user_id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.ray.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,7 +12,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customer")
-public class Customer {
+public class Customer implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="customer_id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

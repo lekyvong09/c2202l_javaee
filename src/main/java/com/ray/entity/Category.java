@@ -1,5 +1,7 @@
 package com.ray.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,10 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name = "Category.HQL.getByName", query = "SELECT c FROM Category c WHERE c.name = :name"),
 })
-public class Category {
+public class Category implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Column(name="category_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id

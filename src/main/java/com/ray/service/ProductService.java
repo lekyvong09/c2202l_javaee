@@ -46,4 +46,8 @@ public class ProductService {
 	public void deleteProduct(Integer productId) {
 		this.productDAO.deleteById(productId);
 	}
+	
+	public List<Product> getProductsByCategory(int categoryId) {
+		return this.productDAO.getProductByCategory(categoryId);
+	}
 }
