@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ray.entity.Category;
+import com.ray.entity.Product;
 import com.ray.service.CategoryService;
+import com.ray.service.ProductService;
 
 
 @WebServlet("")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CategoryService categoryService;
+	private ProductService productService;
        
 
     public HomeServlet() {
         super();
-        categoryService = new CategoryService();
+        productService = new ProductService();
     }
 
 
@@ -30,7 +32,22 @@ public class HomeServlet extends HttpServlet {
 //		List<Category> categoryList = categoryService.listCategory();
 //		request.setAttribute("categoryList", categoryList);
 		
+		List<Product> productList = productService.getNewestProduct();
+		request.setAttribute("newProductList", productList);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("frontend/index.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String searchString = request.getParameter("keyword");
+		List<Product> productList = productService.searchByName(searchString);
+		
+		request.setAttribute("searchResult", productList);
+		request.setAttribute("searchString", searchString);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("frontend/search.jsp");
 		dispatcher.forward(request, response);
 	}
 

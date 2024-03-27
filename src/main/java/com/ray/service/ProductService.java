@@ -50,4 +50,12 @@ public class ProductService {
 	public List<Product> getProductsByCategory(int categoryId) {
 		return this.productDAO.getProductByCategory(categoryId);
 	}
+	
+	public List<Product> getNewestProduct() {
+		return this.productDAO.getNewestProduct();
+	}
+	
+	public List<Product> searchByName(String name) {
+		return this.productDAO.searchByName(name);
+	}
 }

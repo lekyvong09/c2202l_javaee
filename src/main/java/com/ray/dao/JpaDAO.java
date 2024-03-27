@@ -246,4 +246,34 @@ public class JpaDAO<T> {
 		}
 		return objectList;
 	}
+	
+	
+	public List<T> getTopThreeRecord(String hql, Map<String, Object> params) {
+		Transaction transaction = null;
+		List<T> objectList = null;
+		
+		try (Session session = sessionFactory.openSession()) {
+			transaction = session.beginTransaction();
+			
+			@SuppressWarnings("unchecked")
+			Query<T> hqlQuery = session.createNamedQuery(hql);
+			
+			for (Map.Entry<String, Object> entry : params.entrySet()) {
+				hqlQuery.setParameter(entry.getKey(), entry.getValue());
+			}
+			
+			hqlQuery.setFirstResult(0);
+			hqlQuery.setMaxResults(3);
+			
+			objectList = hqlQuery.getResultList();
+			
+			transaction.commit();
+		} catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		}
+		return objectList;
+	}
 }

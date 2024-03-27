@@ -55,6 +55,12 @@ public class ProductDAO extends JpaDAO<Product> {
 		return null;
 	}
 	
+	public List<Product> searchByName(String name) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", "%" + name + "%");
+		return super.getByNamedQueryWithParams("Product.HQL.searchByName", params);
+	}
+	
 	public List<Product> getProductByCategory(int categoryId) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("categoryId", categoryId);
@@ -62,4 +68,13 @@ public class ProductDAO extends JpaDAO<Product> {
 		List<Product> productList = super.getByNamedQueryWithParams("Product.HQL.getByCategory", params);
 		return productList;
 	}
+	
+	public List<Product> getNewestProduct() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		List<Product> productList = super.getTopThreeRecord("Product.HQL.getByOrderByPublishDateDesc", params);
+		
+		return productList;
+	}
+	
 }

@@ -23,7 +23,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name="product")
 @NamedQueries({
 	@NamedQuery(name = "Product.HQL.getByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+	@NamedQuery(name = "Product.HQL.searchByName", query = "SELECT p FROM Product p WHERE p.name like :name"),
 	@NamedQuery(name = "Product.HQL.getByCategory", query = "SELECT p FROM Product p JOIN Category c ON p.category.categoryId = c.categoryId AND c.categoryId = :categoryId"),
+	@NamedQuery(name = "Product.HQL.getByOrderByPublishDateDesc", 
+		query = "SELECT p FROM Product p ORDER BY p.publishDate DESC"),
 })
 public class Product implements Serializable {
 	

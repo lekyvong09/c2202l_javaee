@@ -6,11 +6,11 @@
 		<%@include file="sidebar.jsp" %>
 	
 		<div class="container">
-			<h2 class="text-center">New book arrive</h2>
+			<h2 class="text-center">Search result of ${searchString}</h2>
 			
 			<div class="row">
 			
-				<c:forEach var="product" items="${newProductList}">
+				<c:forEach var="product" items="${searchResult}">
 				
 					<div class="col-xl-4 col-md-6 col-sm-12 g-3">
 						<div class="card h-100">
